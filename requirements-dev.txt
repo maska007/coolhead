@@ -1,0 +1,11 @@
+# Everything for working on the project locally: pip install -r requirements-dev.txt
+-r requirements.txt
+
+# tests (pytest) and app screenshots (playwright; then run: python -m playwright install chromium)
+pytest>=9.1.1
+playwright>=1.64.0
+
+# notebooks: charts, and running them locally (Colab already has these)
+matplotlib>=3.11.2
+nbconvert>=7.17.2
+ipykernel>=7.4.0
