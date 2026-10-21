@@ -21,6 +21,8 @@ white-painted roof and a dry (shade-only) canopy.
 | `experiment_evap.md` | Experiment 1: how fast does wet cloth dry in the sun? (weighing) |
 | `experiment_transp.md` | Experiment 2: how much sunlight gets through dry and wet cloth? (light sensor, optional Arduino) |
 | `tests/` | Tests for the model and the app |
+| `tools/screenshot.py` | Screenshots of every app tab (local or live), to check how it looks |
+| `HANDOFF.md` | Project status, conventions and next steps for whoever continues the work |
 
 ## Model versions
 
