@@ -197,8 +197,9 @@ with tab_cut:
     case = st.selectbox("Case", canopy_cases + [c for c in cases if c not in canopy_cases], format_func=NAME.get)
     d = hourly.get(case, hourly["bare"]).iloc[::60].reset_index(drop=True)      # every 30 minutes
     room = settings["room_c"]
-    layers = (["Outdoor air", "Fabric", "Gap air", "Roof surface", "Ceiling", "Room"] if "canopy" in case
-              else ["Outdoor air", "Roof surface", "Ceiling", "Room"])
+    room_label = f"Room (AC keeps {room:g} °C)"              # fixed in the model: the AC holds it there
+    layers = (["Outdoor air", "Fabric", "Gap air", "Roof surface", "Ceiling", room_label] if "canopy" in case
+              else ["Outdoor air", "Roof surface", "Ceiling", room_label])
     cols = {"Outdoor air": "air_C", "Fabric": "fabric_C", "Gap air": "gap_C", "Roof surface": "roof_C",
             "Ceiling": "ceiling_C"}
 
@@ -206,7 +207,10 @@ with tab_cut:
         return [[row[cols[l]] if l in cols else room] for l in layers]
 
     def title(row):
-        return f"{int(row.hour):02d}:{int(round(row.hour % 1 * 60)):02d}  ·  sun {row.sun_Wm2:,.0f} W/m²"
+        q = row.heat_in_Wm2
+        flow = f"heat into room {q:.0f} W/m²" if q >= 0 else f"heat out of room {-q:.0f} W/m²"
+        return (f"{int(row.hour):02d}:{int(round(row.hour % 1 * 60)):02d}  ·  sun {row.sun_Wm2:,.0f} W/m²"
+                f"  ·  {flow}")
 
     span = max(5.0, float(np.nanmax(np.abs(d[[cols[l] for l in layers if l in cols]].to_numpy() - room))))
     scale = [[0, "#184f95"], [0.5, COL["neutral"]], [1, "#e34948"]]

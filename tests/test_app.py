@@ -52,3 +52,12 @@ def test_no_cases_selected():
     at.multiselect[0].set_value([]).run(timeout=TIMEOUT)
     assert not at.exception
     assert "at least one case" in at.info[0].value
+
+
+def test_cross_section_shows_fixed_room_and_heat_flow():
+    import json
+    at = app()
+    fig = json.loads(at.get("plotly_chart")[-1].proto.spec)   # the cross-section is the last chart
+    assert "Room (AC keeps 26 °C)" in fig["data"][0]["y"]
+    assert "heat into room" in fig["layout"]["title"]["text"]
+    assert all("heat" in f["layout"]["title"]["text"] for f in fig["frames"])
