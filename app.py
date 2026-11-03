@@ -60,7 +60,7 @@ with st.sidebar:
                            key=f"{k}temp")
     dewpoint = st.slider("Dew point (°C) – higher = more humid", -5.0, 30.0, preset.dewpoint, 0.5,
                          key=f"{k}dew")
-    wind = st.slider("Wind at roof level (m/s)", 0.1, 6.0, preset.wind, 0.1, key=f"{k}wind")
+    wind = st.slider("Wind at roof level (m/s)", 0.1, 10.0, preset.wind, 0.1, key=f"{k}wind")
     sun = st.slider("Sun strength (1 = cloudless sky)", 0.1, 1.0, preset.sun_factor, 0.05, key=f"{k}sun")
 
     st.header("Cases")
