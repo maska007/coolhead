@@ -58,7 +58,7 @@ with st.sidebar:
     date = st.date_input("Date (sets the sun's path)", pd.Timestamp(preset.date).date(), key=f"{k}date")
     tmin, tmax = st.slider("Air temperature, min – max (°C)", 0.0, 50.0, (preset.tmin, preset.tmax), 0.5,
                            key=f"{k}temp")
-    dewpoint = st.slider("Dew point (°C) – higher = more humid", -5.0, 30.0, preset.dewpoint, 0.5,
+    dewpoint = st.slider("Dew point (°C) – higher = more humid", -5.0, 30.0, preset.dewpoint, 0.1,
                          key=f"{k}dew")
     wind = st.slider("Wind at roof level (m/s)", 0.1, 10.0, preset.wind, 0.1, key=f"{k}wind")
     sun = st.slider("Sun strength (1 = cloudless sky)", 0.1, 1.0, preset.sun_factor, 0.01, key=f"{k}sun")
